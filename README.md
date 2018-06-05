@@ -1,23 +1,31 @@
+[image1]: ./outputs/111.png "1"
+[image2]: ./outputs/222.png "2"
+[image3]: ./outputs/333.png "3"
+
 # CarND-Path-Planning-Project
 Self-Driving Car Engineer Nanodegree Program
 
-The project STARTER details from UDACITY's are belwo from the Section named : "Goals".
+### Goals
+In this project your goal is to safely navigate around a virtual highway with other traffic that is driving +-10 MPH of the 50 MPH speed limit. You will be provided the car's localization and sensor fusion data, there is also a sparse map list of waypoints around the highway. The car should try to go as close as possible to the 50 MPH speed limit, which means passing slower traffic when possible, note that other cars will try to change lanes too. The car should avoid hitting other cars at all cost as well as driving inside of the marked road lanes at all times, unless going from one lane to another. The car should be able to make one complete loop around the 6946m highway. Since the car is trying to go 50 MPH, it should take a little over 5 minutes to complete 1 loop. Also the car should not experience total acceleration over 10 m/s^2 and jerk that is greater than 10 m/s^3.
+
+The project STARTER details from UDACITY's are below from the Section named : "STARTER CODE DETAILS".
 
 ### Simulator.
 You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases/tag/T3_v1.2).
 
 ## Implementation/Submission Details:
 
+![alt text][image1]![alt text][image2]![alt text][image3]
+
 With reference to [Rubric](https://review.udacity.com/#!/rubrics/1020/view):
 
 - The code compiles correctly.  - **<span style="color:green; font-size:1em;"> YES </span>**
-- The car is able to drive at least 4.32 miles without incident - **<span style="color:green; font-size:1em;"> YES, tested for above 20 miles. </span>**
+- The car is able to drive at least 4.32 miles without incident - **<span style="color:green; font-size:1em;"> YES, tested for above 13 miles. </span>**
 - The car drives according to the speed limit - **<span style="color:green; font-size:1em;"> Always stayed within 49.5 MPH. </span>**
 - Max Acceleration and Jerk are not Exceeded - **<span style="color:green; font-size:1em;"> Never exceeded a acceleration >= 10 m/s^2 & a jerk >= 10 m/s^3. </span>**
-- Car does not have collisions - **<span style="color:green; font-size:1em;"> No collision detected in the span of 20+ miles run. </span>**
+- Car does not have collisions - **<span style="color:green; font-size:1em;"> No collision detected in the span of 13+ miles run. </span>**
 - The car stays in its lane, except for the time between changing lanes - **<span style="color:green; font-size:1em;"> YES, criteria met. </span>**
 - The car is able to change lanes - **<span style="color:green; font-size:1em;"> Wherever feasible and required, ECO did the lane change. </span>**
-- **<span style="color:green; font-size:1em;"> YES, tested for above 20 miles. </span>**
 
 
 ### Reflection - Model Documentation
@@ -66,10 +74,9 @@ For change in velocity of the car (Line 409), the change is decided in Behavior 
 The code is from line 322 to 436.
 
 ----------------------------------------
+----------------------------------------
 
-
-### Goals
-In this project your goal is to safely navigate around a virtual highway with other traffic that is driving +-10 MPH of the 50 MPH speed limit. You will be provided the car's localization and sensor fusion data, there is also a sparse map list of waypoints around the highway. The car should try to go as close as possible to the 50 MPH speed limit, which means passing slower traffic when possible, note that other cars will try to change lanes too. The car should avoid hitting other cars at all cost as well as driving inside of the marked road lanes at all times, unless going from one lane to another. The car should be able to make one complete loop around the 6946m highway. Since the car is trying to go 50 MPH, it should take a little over 5 minutes to complete 1 loop. Also the car should not experience total acceleration over 10 m/s^2 and jerk that is greater than 10 m/s^3.
+##STARTER CODE DETAILS
 
 #### The map of the highway is in data/highway_map.txt
 Each waypoint in the list contains  [x,y,s,dx,dy] values. x and y are the waypoint's map coordinate position, the s value is the distance along the road to get to that waypoint in meters, the dx and dy values define the unit normal vector pointing outward of the highway loop.
@@ -202,5 +209,4 @@ still be compilable with cmake and make./
 ## How to write a README
 A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
 
-# Term3-CarND-Path-Planning-Project
 # Term3-CarND-Path-Planning-Project
