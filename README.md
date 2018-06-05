@@ -1,8 +1,72 @@
 # CarND-Path-Planning-Project
 Self-Driving Car Engineer Nanodegree Program
-   
+
+The project STARTER details from UDACITY's are belwo from the Section named : "Goals".
+
 ### Simulator.
 You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases/tag/T3_v1.2).
+
+## Implementation/Submission Details:
+
+With reference to [Rubric](https://review.udacity.com/#!/rubrics/1020/view):
+
+- The code compiles correctly.  - **<span style="color:green; font-size:1em;"> YES </span>**
+- The car is able to drive at least 4.32 miles without incident - **<span style="color:green; font-size:1em;"> YES, tested for above 20 miles. </span>**
+- The car drives according to the speed limit - **<span style="color:green; font-size:1em;"> Always stayed within 49.5 MPH. </span>**
+- Max Acceleration and Jerk are not Exceeded - **<span style="color:green; font-size:1em;"> Never exceeded a acceleration >= 10 m/s^2 & a jerk >= 10 m/s^3. </span>**
+- Car does not have collisions - **<span style="color:green; font-size:1em;"> No collision detected in the span of 20+ miles run. </span>**
+- The car stays in its lane, except for the time between changing lanes - **<span style="color:green; font-size:1em;"> YES, criteria met. </span>**
+- The car is able to change lanes - **<span style="color:green; font-size:1em;"> Wherever feasible and required, ECO did the lane change. </span>**
+- **<span style="color:green; font-size:1em;"> YES, tested for above 20 miles. </span>**
+
+
+### Reflection - Model Documentation
+
+Started implementation by taking the STARTER code from [Udacity's CarND-Path-Planning-Project](https://github.com/udacity/CarND-Path-Planning-Project) and lead given in the Project walk through lecture.
+
+The Path Planning code is in src/main.cpp from Line 242 to 432.
+
+**Prediction Part:** This code uses the following inputs : **(1).** Telemetry and **(2).** Sensor fusion data. It makes predictions about the environment we are in, for the following scenarios:
+
+- Whether there a car if in **FRONT** of us blocking the traffic ?
+- Whether there a car to the **LEFT** of us making a lane change not safe for car ?
+- Whether there a car to the **RIGHT** of us making a lane change not safe for car ?
+
+They are determined by calculating the lane the other car(s) is in and the location it will be at based on the last planned trajectory. A move won't be done if a given car's distance in that lane is less than 30 meters.
+
+The code is from line 250 to 295.
+
+**Behavior Part:** This code part does the following:
+
+- Should we speed UP or speed DOWN ?
+- Should we change lanes, if we have a car AHEAD of us ?
+
+Based on the prediction output it will :
+
+- Either increase the speed, or
+- Decrease the speed, or
+- Make a lane change when it is safe/feasible.
+
+We don't increase the speed in Behavior code area. We maintain a speed difference in **diff_speed** variable, which is used for speed changes when generating the following **Trajectory code part**. This approach makes the car more responsive acting faster to changing situations.
+
+The code is from line 298 to 320.
+
+**Trajectory Part:** Does the trajectory calculation based on :
+- Past path points,
+- Speed,
+- Lane output from the Behavior module,
+- Car coordinates
+
+Initially, last 2 points of the previous trajectory or the car's position, if there is no previous trajectory found (Line 334) are used in conjunction with 3 points at a far distance (lines 363 to 365) for spline calculation. For spline calculation, the coordinates are transformed (shifted and rotated) to local car coordinates (Line 375).
+
+To get a continuous trajectory, the earlier trajectory points are copied to the new trajectory (Line 396). The remaining points are calculated by evaluating the spline & then transforming the output coordinates to local coordinates.
+
+For change in velocity of the car (Line 409), the change is decided in Behavior part (298-320), but is used here to increase/decrease speed for every trajectory point.
+
+The code is from line 322 to 436.
+
+----------------------------------------
+
 
 ### Goals
 In this project your goal is to safely navigate around a virtual highway with other traffic that is driving +-10 MPH of the 50 MPH speed limit. You will be provided the car's localization and sensor fusion data, there is also a sparse map list of waypoints around the highway. The car should try to go as close as possible to the 50 MPH speed limit, which means passing slower traffic when possible, note that other cars will try to change lanes too. The car should avoid hitting other cars at all cost as well as driving inside of the marked road lanes at all times, unless going from one lane to another. The car should be able to make one complete loop around the 6946m highway. Since the car is trying to go 50 MPH, it should take a little over 5 minutes to complete 1 loop. Also the car should not experience total acceleration over 10 m/s^2 and jerk that is greater than 10 m/s^3.
@@ -38,13 +102,13 @@ Here is the data provided from the Simulator to the C++ Program
 #### Previous path data given to the Planner
 
 //Note: Return the previous list but with processed points removed, can be a nice tool to show how far along
-the path has processed since last time. 
+the path has processed since last time.
 
 ["previous_path_x"] The previous list of x points previously given to the simulator
 
 ["previous_path_y"] The previous list of y points previously given to the simulator
 
-#### Previous path's end s and d values 
+#### Previous path's end s and d values
 
 ["end_path_s"] The previous list's last point's frenet s value
 
@@ -52,7 +116,7 @@ the path has processed since last time.
 
 #### Sensor Fusion Data, a list of all other car's attributes on the same side of the road. (No Noise)
 
-["sensor_fusion"] A 2d vector of cars and then that car's [car's unique ID, car's x position in map coordinates, car's y position in map coordinates, car's x velocity in m/s, car's y velocity in m/s, car's s position in frenet coordinates, car's d position in frenet coordinates. 
+["sensor_fusion"] A 2d vector of cars and then that car's [car's unique ID, car's x position in map coordinates, car's y position in map coordinates, car's x velocity in m/s, car's y velocity in m/s, car's s position in frenet coordinates, car's d position in frenet coordinates.
 
 ## Details
 
@@ -82,7 +146,7 @@ A really helpful resource for doing this project and creating smooth trajectorie
   * Run either `install-mac.sh` or `install-ubuntu.sh`.
   * If you install from source, checkout to commit `e94b6e1`, i.e.
     ```
-    git clone https://github.com/uWebSockets/uWebSockets 
+    git clone https://github.com/uWebSockets/uWebSockets
     cd uWebSockets
     git checkout e94b6e1
     ```
@@ -138,4 +202,5 @@ still be compilable with cmake and make./
 ## How to write a README
 A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
 
+# Term3-CarND-Path-Planning-Project
 # Term3-CarND-Path-Planning-Project
